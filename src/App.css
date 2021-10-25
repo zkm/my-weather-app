@@ -1,16 +1,11 @@
+body {
+  background-color: #222;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  padding: 20px;
+  color: white;
 }
 
 .App-header {
@@ -35,4 +30,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.margin-top {
+  margin: 50px 0px;
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  position: relative;
+  vertical-align: middle !important;
+  text-align: center !important;
+}
+
+svg {
+  max-height: 150px;
+}
+
+td:first-of-type,
+td:first-of-type > div {
+  height: 200px;
+  width: 250px;
 }
