@@ -1,4 +1,4 @@
-import { FETCH_WEATHER } from "../data/openWeatherAPI";
+import { FETCH_WEATHER } from '../data/openWeatherAPI';
 
 export default function weatherReducer(state = [], action) {
   console.log(state);

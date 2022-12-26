@@ -1,14 +1,10 @@
-import React from "react";
-import {
-  Sparklines,
-  SparklinesLine,
-  SparklinesReferenceLine
-} from "react-sparklines";
+import React from 'react';
+import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines';
 
-const Chart = props => {
+const Chart = (props) => {
   //calculate average values
   function average(data) {
-    return data.reduce(function(acc, val) {
+    return data.reduce(function (acc, val) {
       let total = acc + val / props.data.length;
       return Math.floor(total);
     }, 0);

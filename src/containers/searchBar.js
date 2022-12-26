@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchWeather } from "../data/openWeatherAPI";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../data/openWeatherAPI';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      term: ""
+      term: '',
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -40,14 +40,14 @@ class SearchBar extends Component {
     this.props.fetchWeather(this.state.term);
     //reset form
     this.setState({
-      term: ""
+      term: '',
     });
   }
 
   // on any input change we set state within class
   onInputChange(event) {
     this.setState({
-      term: event.target.value
+      term: event.target.value,
     });
   }
 }

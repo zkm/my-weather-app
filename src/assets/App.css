@@ -8,34 +8,6 @@ body {
   color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.margin-top {
-  margin: 50px 0px;
-}
-
 table {
   width: 100%;
 }
@@ -55,4 +27,51 @@ td:first-of-type,
 td:first-of-type > div {
   height: 200px;
   width: 250px;
+}
+
+button {
+  background: #ccc;
+  border: 1px solid transparent;
+  color: #333;
+  display: inline-block;
+  font-size: 1em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  padding: 0.6em 1em;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #3a0775;
+  color: white;
+  cursor: pointer;
+}
+
+.placesAutocomplete__hint {
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+label.label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  border: 1px solid #222;
+  border-radius: 0;
+  box-sizing: border-box;
+  height: 42px;
+  padding: 8px;
+  width: 300px;
+}
+
+.inputError {
+  background: #ff00002e;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 14px;
+  margin-left: 4px;
+  padding: 8px;
 }
