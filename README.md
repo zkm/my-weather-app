@@ -1,6 +1,6 @@
 # my-weather-app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Recommended Node version `v16.19.0`
 
 ## Available Scripts
 

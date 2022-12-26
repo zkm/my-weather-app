@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchWeather } from "../api/openWeatherAPI";
+import { fetchWeather } from "../data/openWeatherAPI";
 
 class SearchBar extends Component {
   constructor(props) {
