@@ -6,13 +6,21 @@ import './assets/App.css';
 
 class App extends Component {
   render() {
+    const mapsKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
     return (
       <div className="App">
         <h1>React Weather App</h1>
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} id="google-maps-script">
-          <SearchBar />
-          <WeatherList />
-        </LoadScript>
+        {mapsKey ? (
+          <LoadScript googleMapsApiKey={mapsKey} id="google-maps-script">
+            <SearchBar />
+            <WeatherList />
+          </LoadScript>
+        ) : (
+          <>
+            <SearchBar />
+            <WeatherList />
+          </>
+        )}
       </div>
     );
   }

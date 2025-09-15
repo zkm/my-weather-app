@@ -9,7 +9,9 @@ let _axios;
 function getAxios() {
   if (!_axios) {
     // eslint-disable-next-line global-require
-    _axios = require('axios');
+    const mod = require('axios');
+    // Support both ESM default export and CJS require shape
+    _axios = mod && mod.default ? mod.default : mod;
   }
   return _axios;
 }
