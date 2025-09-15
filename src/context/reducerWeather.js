@@ -1,7 +1,6 @@
 import { FETCH_WEATHER, REMOVE_WEATHER, CLEAR_WEATHER } from '../data/openWeatherAPI';
 
 export default function weatherReducer(state = [], action) {
-  console.log(state);
   switch (action.type) {
     case FETCH_WEATHER: {
       // If the request failed or data is missing, ignore this action
