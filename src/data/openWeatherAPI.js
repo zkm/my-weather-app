@@ -3,19 +3,6 @@ export const REMOVE_WEATHER = 'REMOVE_WEATHER';
 export const CLEAR_WEATHER = 'CLEAR_WEATHER';
 const units = 'imperial';
 
-// Lazily require axios to avoid Jest ESM parsing issues when importing this
-// module in tests that don't actually use axios (e.g., parseQuery unit tests).
-let _axios;
-function getAxios() {
-  if (!_axios) {
-    // eslint-disable-next-line global-require
-    const mod = require('axios');
-    // Support both ESM default export and CJS require shape
-    _axios = mod && mod.default ? mod.default : mod;
-  }
-  return _axios;
-}
-
 export function parseQuery(raw) {
   const input = (raw || '').trim();
   const zipOnly = input.match(/^\d{5}$/);
@@ -33,21 +20,30 @@ export function parseQuery(raw) {
 
 export function fetchWeather(rawCityOrZip) {
   // Accept input like "Chicago", "Chicago, IL", "Chicago,IL,US", "60601", or "60601,US"
-  const params = {
+  const query = {
     units,
     appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
+    ...parseQuery(rawCityOrZip),
   };
-  Object.assign(params, parseQuery(rawCityOrZip));
+  const search = new URLSearchParams(query).toString();
+  const url = `https://api.openweathermap.org/data/2.5/forecast?${search}`;
 
-  const request = getAxios().get('https://api.openweathermap.org/data/2.5/forecast', {
-    params,
-    validateStatus: (status) => status >= 200 && status < 500,
-  });
+  const request = fetch(url)
+    .then(async (res) => {
+      let data = null;
+      try {
+        data = await res.json();
+      } catch (e) {
+        // ignore JSON parse errors
+      }
+      return { status: res.status, data };
+    })
+    .catch((err) => ({ status: 0, error: true, data: null }));
 
   return {
     type: 'FETCH_WEATHER',
     payload: request,
-    meta: { query: params.q || params.zip },
+    meta: { query: query.q || query.zip },
   };
 }
 
