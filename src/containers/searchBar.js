@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchWeather } from '../data/openWeatherAPI';
+import { fetchWeather, weatherRequest } from '../data/openWeatherAPI';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -18,15 +18,18 @@ class SearchBar extends Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit} className="input-group margin-top">
+        <label htmlFor="cityInput" className="sr-only">City</label>
         <input
+          id="cityInput"
           onChange={this.onInputChange}
           value={this.state.term}
           className="form-control"
           type="text"
-          placeholder="City Name"
+          placeholder="Enter city or ZIP (e.g., Chicago, Chicago, IL, or 60601)"
+          aria-label="City"
         />
         <span className="input-group-btn">
-          <button className="btn btn-default" type="submit">
+          <button className="btn btn-default" type="submit" disabled={!this.state.term.trim()}>
             Submit
           </button>
         </span>
@@ -37,7 +40,10 @@ class SearchBar extends Component {
   // on form submission
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.fetchWeather(this.state.term);
+    const query = this.state.term.trim();
+    if (!query) return;
+    this.props.weatherRequest(query);
+    this.props.fetchWeather(query);
     //reset form
     this.setState({
       term: '',
@@ -52,11 +58,15 @@ class SearchBar extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchWeather }, dispatch);
+function mapStateToProps({ ui }) {
+  return { ui };
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchWeather, weatherRequest }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
 
 // container setup process
 // import connect

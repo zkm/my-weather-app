@@ -1,4 +1,10 @@
-# API Key Setup
+# my-weather-app
+
+Weather forecast app built with Create React App, React 19, Redux, and Axios. It fetches 5‑day forecasts from OpenWeather and displays a small Google Map per city.
+
+Recommended Node.js: 18.x or 20.x LTS
+
+## API key setup
 
 This app requires an OpenWeatherMap API key to fetch weather data.
 
@@ -14,7 +20,7 @@ REACT_APP_OPEN_WEATHER_API_KEY=your_actual_api_key_here
 
 Restart the development server after adding or changing the `.env` file.
 
-## Google Maps API Key (for map rendering)
+## Google Maps API key (for map rendering)
 
 This project also renders a small Google Map preview per city. You’ll need a Google Maps JavaScript API key:
 
@@ -33,73 +39,85 @@ Troubleshooting:
 - If you see "NoApiKeys" or "ApiProjectMapError" in the browser console, ensure the key is present, the Maps JavaScript API is enabled, and referrer restrictions allow your origin.
 - If you change `.env` while the dev server is running, it won’t pick up changes until you restart.
 
-# my-weather-app
+## Quick start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Recommended Node version `v16.19.0`
+1) Install dependencies
 
-## Available Scripts
+```bash
+yarn install
+```
 
-In the project directory, you can run:
+2) Create `.env` with required API keys
 
-### `yarn start`
+```dotenv
+REACT_APP_OPEN_WEATHER_API_KEY=your_openweather_key
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_key
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+3) Run the app
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+yarn start
+```
 
-### `yarn test`
+Open http://localhost:3000 to use the app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## API keys
 
-### `yarn build`
+### OpenWeatherMap
+- Sign up: https://home.openweathermap.org/users/sign_up
+- Copy your key from the “API keys” page.
+- The app uses the 5‑day forecast endpoint and supports:
+	- City: `Chicago`
+	- City and state: `Chicago, IL` (normalized to `Chicago,IL,US`)
+	- ZIP: `60601` (defaults to `US`) or `60601,US`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Google Maps JavaScript API
+- Create a project in Google Cloud Console: https://console.cloud.google.com/
+- Enable “Maps JavaScript API”.
+- Create an API key and restrict it to HTTP referrers:
+	- Local dev: `http://localhost:3000/*`
+	- GitHub Pages: `https://zkm.github.io/my-weather-app/*`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Security: `.env` is git‑ignored by default. Don’t commit API keys.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Scripts
 
-### `yarn eject`
+- `yarn start` – start local dev server
+- `yarn build` – production build in `build/`
+- `yarn test` – run tests (if any)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deployment (GitHub Pages via Actions)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This repository is configured to deploy to GitHub Pages automatically on pushes to `main` using GitHub Actions.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+0) In your repository, go to Settings → Pages and set "Source" to "GitHub Actions".
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1) Ensure the `homepage` field in `package.json` is set to:
 
-## Learn More
+```json
+"homepage": "https://zkm.github.io/my-weather-app"
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2) Add repository secrets (Settings → Secrets and variables → Actions → New repository secret):
+- `REACT_APP_OPEN_WEATHER_API_KEY`
+- `REACT_APP_GOOGLE_MAPS_API_KEY`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3) Push to `main`. The workflow will:
+- Install dependencies
+- Build the app
+- Upload the build as a Pages artifact
+- Deploy to GitHub Pages
 
-### Code Splitting
+Your site will be available at: https://zkm.github.io/my-weather-app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Troubleshooting
 
-### Analyzing the Bundle Size
+- Maps not showing / NoApiKeys or ApiProjectMapError
+	- Ensure `REACT_APP_GOOGLE_MAPS_API_KEY` is set and Maps JavaScript API is enabled.
+	- Check referrer restrictions include localhost and the GitHub Pages origin.
+- 404 from OpenWeather
+	- Try city only first (e.g., `Chicago`), or `City, ST` (the app normalizes to `City,ST,US`).
+- Env changes not applied
+	- Stop and restart `yarn start` – CRA only reads `.env` at startup.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
