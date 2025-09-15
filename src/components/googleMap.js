@@ -1,18 +1,28 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React from 'react';
+import { GoogleMap } from '@react-google-maps/api';
 
-export class MapContainer extends Component {
-  render() {
-    return (
-      <Map
-        google={this.props.google}
-        initialCenter={{ lat: this.props.lat, lng: this.props.lon }}
-        zoom={14}
-      />
-    );
+const containerStyle = {
+  width: '200px',
+  height: '150px',
+};
+
+export default function MapContainer({ lat, lon, zoom = 12 }) {
+  const center = { lat, lng: lon };
+
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const isLoaded = typeof window !== 'undefined' && !!window.google;
+
+  if (!apiKey) {
+    return <div style={containerStyle}>Map unavailable (missing API key)</div>;
   }
-}
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-})(MapContainer);
+  if (!isLoaded) {
+    return <div style={containerStyle}>Loading map…</div>;
+  }
+
+  return (
+    <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={zoom}>
+      {null}
+    </GoogleMap>
+  );
+}

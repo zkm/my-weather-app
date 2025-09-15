@@ -1,3 +1,38 @@
+# API Key Setup
+
+This app requires an OpenWeatherMap API key to fetch weather data.
+
+1. Sign up for a free account at https://home.openweathermap.org/users/sign_up
+2. After verifying your email, go to the "API keys" section in your OpenWeatherMap dashboard.
+3. Copy your API key.
+4. In the root of this project, create a file named `.env` (if it doesn't exist).
+5. Add the following line to your `.env` file, replacing `your_actual_api_key_here` with your key:
+
+```
+REACT_APP_OPEN_WEATHER_API_KEY=your_actual_api_key_here
+```
+
+Restart the development server after adding or changing the `.env` file.
+
+## Google Maps API Key (for map rendering)
+
+This project also renders a small Google Map preview per city. You’ll need a Google Maps JavaScript API key:
+
+1. Create a Google Cloud project (or use an existing one): https://console.cloud.google.com/
+2. Enable the "Maps JavaScript API" for your project.
+3. Create an API key (APIs & Services > Credentials) and restrict it to HTTP referrers (recommended). For local dev, add `http://localhost:3000/*`.
+4. Add the key to your `.env` file:
+
+```
+REACT_APP_GOOGLE_MAPS_API_KEY=your_google_maps_key_here
+```
+
+After changing `.env`, stop and restart `yarn start`.
+
+Troubleshooting:
+- If you see "NoApiKeys" or "ApiProjectMapError" in the browser console, ensure the key is present, the Maps JavaScript API is enabled, and referrer restrictions allow your origin.
+- If you change `.env` while the dev server is running, it won’t pick up changes until you restart.
+
 # my-weather-app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Recommended Node version `v16.19.0`
