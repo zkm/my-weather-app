@@ -42,6 +42,14 @@ node_modules/
 jspm_packages/
 /.pnp
 .pnp.js
+.pnp.cjs
+.pnp.loader.mjs
+
+# Yarn v2+ files
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
 # TypeScript v1 declaration files
 typings/
 
