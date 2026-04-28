@@ -15,6 +15,6 @@ function renderWithStore(
 
 test('submit is disabled when input is empty', () => {
   renderWithStore(<SearchBar />);
-  const button = screen.getByRole('button', { name: /submit/i });
+  const button = screen.getByRole('button', { name: /get forecast/i });
   expect(button).toBeDisabled();
 });
