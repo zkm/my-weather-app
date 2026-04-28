@@ -17,14 +17,14 @@ class WeatherList extends Component {
     const { lon, lat } = cityData.city.coord;
 
     return (
-      <tr key={id || name}>
-        <td>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <tr key={id || name} className="weather-row">
+        <td className="city-cell" data-label="City">
+          <div className="city-meta">
             <GoogleMap lon={lon} lat={lat} zoom={12} />
-            <div>
-              <div style={{ fontWeight: 600 }}>{name}</div>
+            <div className="city-details">
+              <div className="city-name">{name}</div>
               <button
-                className="btn btn-xs btn-danger"
+                className="action-button action-danger"
                 onClick={() => this.props.removeWeather(id)}
                 title="Remove city"
               >
@@ -33,13 +33,13 @@ class WeatherList extends Component {
             </div>
           </div>
         </td>
-        <td>
+        <td data-label="Temperature (F)">
           <Chart data={temp} color="orange" units="F" />
         </td>
-        <td>
+        <td data-label="Humidity (RH)">
           <Chart data={humidity} color="blue" units="%" />
         </td>
-        <td>
+        <td data-label="Pressure (hPa)">
           <Chart data={pressure} color="green" units="hPa" />
         </td>
       </tr>
@@ -50,47 +50,53 @@ class WeatherList extends Component {
     const hasResults = Array.isArray(this.props.weather) && this.props.weather.length > 0;
     const { loading, error, lastQuery } = this.props.ui || {};
     return (
-      <div className="table-responsive margin-top">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h3 style={{ margin: 0 }}>Results</h3>
+      <section className="card results-card" aria-live="polite">
+        <div className="results-header">
+          <h2>Results</h2>
           {hasResults && (
-            <button className="btn btn-sm btn-warning" onClick={this.props.clearWeather} title="Clear all">
+            <button
+              className="action-button action-neutral"
+              onClick={this.props.clearWeather}
+              title="Clear all"
+            >
               Clear All
             </button>
           )}
         </div>
         {loading && (
-          <div className="alert alert-info" role="status" style={{ marginTop: 10 }}>
+          <div className="status status-info" role="status">
             Loading weather for {lastQuery || 'city'}…
           </div>
         )}
         {!!error && (
-          <div className="alert alert-warning" role="alert" style={{ marginTop: 10 }}>
+          <div className="status status-warning" role="alert">
             {error}
           </div>
         )}
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th>City</th>
-              <th>Temperature (F)</th>
-              <th>Humidity (RH)</th>
-              <th>Pressure (%)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!hasResults ? (
+        <div className="results-table-wrap">
+          <table className="results-table">
+            <thead>
               <tr>
-                <td colSpan="4" style={{ textAlign: 'center', color: '#777' }}>
-                  Search for a city to see results
-                </td>
+                <th>City</th>
+                <th>Temperature (F)</th>
+                <th>Humidity (RH)</th>
+                <th>Pressure (hPa)</th>
               </tr>
-            ) : (
-              this.props.weather.map(this.renderWeather)
-            )}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {!hasResults ? (
+                <tr>
+                  <td colSpan="4" className="empty-state">
+                    Search for a city to see results
+                  </td>
+                </tr>
+              ) : (
+                this.props.weather.map(this.renderWeather)
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     );
   }
 }

@@ -16,24 +16,30 @@ class SearchBar extends Component {
   }
 
   render() {
+    const query = this.state.term.trim();
     return (
-      <form onSubmit={this.onFormSubmit} className="input-group margin-top">
-        <label htmlFor="cityInput" className="sr-only">City</label>
-        <input
-          id="cityInput"
-          onChange={this.onInputChange}
-          value={this.state.term}
-          className="form-control"
-          type="text"
-          placeholder="Enter city or ZIP (e.g., Chicago, Chicago, IL, or 60601)"
-          aria-label="City"
-        />
-        <span className="input-group-btn">
-          <button className="btn btn-default" type="submit" disabled={!this.state.term.trim()}>
-            Submit
-          </button>
-        </span>
-      </form>
+      <section className="card search-card" aria-label="Search weather by location">
+        <form onSubmit={this.onFormSubmit} className="search-form">
+          <label htmlFor="cityInput" className="search-label">
+            Search city or ZIP
+          </label>
+          <div className="search-controls">
+            <input
+              id="cityInput"
+              onChange={this.onInputChange}
+              value={this.state.term}
+              className="search-input"
+              type="text"
+              placeholder="Chicago, Chicago IL, or 60601"
+              aria-label="City or ZIP"
+            />
+            <button className="search-button" type="submit" disabled={!query}>
+              Get forecast
+            </button>
+          </div>
+          <p className="search-hint">Use city, state, or ZIP for faster results.</p>
+        </form>
+      </section>
     );
   }
 

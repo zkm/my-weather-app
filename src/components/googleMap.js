@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleMap } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '200px',
+  width: '210px',
   height: '150px',
 };
 
@@ -13,11 +13,19 @@ export default function MapContainer({ lat, lon, zoom = 12 }) {
   const isLoaded = typeof window !== 'undefined' && !!window.google;
 
   if (!apiKey) {
-    return <div style={containerStyle}>Map unavailable (missing API key)</div>;
+    return (
+      <div style={containerStyle} className="map-frame">
+        Map unavailable (missing API key)
+      </div>
+    );
   }
 
   if (!isLoaded) {
-    return <div style={containerStyle}>Loading map…</div>;
+    return (
+      <div style={containerStyle} className="map-frame">
+        Loading map...
+      </div>
+    );
   }
 
   return (

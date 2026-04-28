@@ -4,7 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import SearchBar from './searchBar';
 
-function renderWithStore(ui, preloadedState = { ui: { loading: false, error: null, lastQuery: '' } }) {
+function renderWithStore(
+  ui,
+  preloadedState = { ui: { loading: false, error: null, lastQuery: '' } },
+) {
   const reducer = (state = preloadedState, _action) => state;
   const store = createStore(reducer, preloadedState);
   return render(<Provider store={store}>{ui}</Provider>);

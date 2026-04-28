@@ -12,12 +12,12 @@ const Chart = (props) => {
 
   //sparklines external  library
   return (
-    <div>
+    <div className="chart">
       <Sparklines height={120} width={180} data={props.data}>
         <SparklinesLine color={props.color} />
         <SparklinesReferenceLine type="avg" />
       </Sparklines>
-      <div>
+      <div className="chart-average">
         Avg : {average(props.data)} {props.units}
       </div>
     </div>
