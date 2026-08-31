@@ -22,7 +22,7 @@ export function fetchWeather(rawCityOrZip) {
   // Accept input like "Chicago", "Chicago, IL", "Chicago,IL,US", "60601", or "60601,US"
   const query = {
     units,
-    appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
+    appid: import.meta.env.VITE_OPEN_WEATHER_API_KEY,
     ...parseQuery(rawCityOrZip),
   };
   const search = new URLSearchParams(query).toString();

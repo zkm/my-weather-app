@@ -6,7 +6,7 @@ const containerStyle = {
   height: '150px',
 };
 
-const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 export default function MapContainer({ lat, lon, zoom = 12 }) {
   const center = { lat, lng: lon };
