@@ -38,7 +38,7 @@ export function fetchWeather(rawCityOrZip) {
       }
       return { status: res.status, data };
     })
-    .catch((err) => ({ status: 0, error: true, data: null }));
+    .catch((_err) => ({ status: 0, error: true, data: null }));
 
   return {
     type: 'FETCH_WEATHER',
