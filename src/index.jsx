@@ -1,13 +1,17 @@
 import { createRoot } from 'react-dom/client';
 
 import { Provider } from 'react-redux';
-import Promise from 'redux-promise';
+import reduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import './assets/index.css';
 import App from './App';
 import Reducers from './context';
 
-const createStoreWithMiddleware = applyMiddleware(Promise)(createStore);
+// redux-promise is CommonJS. Since Vite 8.3 the default import is its whole
+// module.exports ({ default: fn }) rather than the middleware itself.
+const promiseMiddleware = reduxPromise.default ?? reduxPromise;
+
+const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 const container = document.getElementById('root');
 const root = createRoot(container);
