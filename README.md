@@ -1,5 +1,17 @@
 # my-weather-app
 
+[![Deploy to GitHub Pages](https://github.com/zkm/my-weather-app/actions/workflows/deploy.yml/badge.svg)](https://github.com/zkm/my-weather-app/actions/workflows/deploy.yml)
+[![live demo](https://img.shields.io/website?url=https%3A%2F%2Fzkm.github.io%2Fmy-weather-app%2F&label=live%20demo)](https://zkm.github.io/my-weather-app/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-764ABC?logo=redux&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)
+![Google Maps](https://img.shields.io/badge/Google%20Maps-4285F4?logo=googlemaps&logoColor=white)
+![Yarn 4](https://img.shields.io/badge/Yarn-4-2C8EBB?logo=yarn&logoColor=white)
+![Node.js 22](https://img.shields.io/badge/Node.js-22-5FA04E?logo=nodedotjs&logoColor=white)
+
 Weather forecast app built with Vite, React 19 and Redux. It fetches 5‑day forecasts from OpenWeather, charts them with sparklines and displays a small Google Map per city.
 
 Live site: https://zkm.github.io/my-weather-app
